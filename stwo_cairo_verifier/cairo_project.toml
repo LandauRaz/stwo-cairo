@@ -1,0 +1,20 @@
+[crate_roots]
+stwo_cairo_verifier = "src"
+bounded_int = "bounded_int/src"
+main = "main/src"
+
+[config.override.stwo_cairo_verifier]
+edition = "2024_07"
+
+[config.override.stwo_cairo_verifier.dependencies.bounded_int]
+discriminator = "bounded_int"
+
+
+[config.override.main]
+edition = "2024_07"
+
+[config.override.main.dependencies.stwo_cairo_verifier]
+discriminator = "stwo_cairo_verifier"
+
+[config.override.bounded_int]
+edition = "2023_10"
