@@ -2,7 +2,6 @@ use core::array::SpanTrait;
 use core::num::traits::{WrappingMul, WrappingSub};
 use core::poseidon::{hades_permutation, poseidon_hash_span};
 use core::traits::DivRem;
-use crate::fields::m31::M31Trait;
 use crate::fields::qm31::QM31Trait;
 use crate::utils::pack4;
 use crate::{BaseField, SecureField};
@@ -158,7 +157,12 @@ fn gen_bit_mask(n_bits: u32) -> u128 {
 fn extract_m31<const N: usize>(ref num: u256) -> BaseField {
     let (q, r) = DivRem::div_rem(num, M31_SHIFT_NZ_U256);
     num = q;
-    M31Trait::reduce_u128(r.low)
+    let r: u32 = r.try_into().unwrap();
+    if r.into() == M31_SHIFT - 1 {
+        BaseField { inner: 0 }
+    } else {
+        BaseField { inner: r }
+    }
 }
 
 
