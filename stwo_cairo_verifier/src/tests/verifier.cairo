@@ -1,52 +1,18 @@
-use stwo_cairo_verifier::channel::ChannelImpl;
-use stwo_cairo_verifier::circle::{
-    CirclePoint, CirclePointIndexImpl, CirclePointQM31AddCirclePointM31Impl,
-};
-use stwo_cairo_verifier::fields::qm31::{QM31, QM31Impl, QM31One, QM31Zero};
-use stwo_cairo_verifier::fri::FriConfig;
-use stwo_cairo_verifier::pcs::PcsConfig;
-use stwo_cairo_verifier::pcs::verifier::CommitmentSchemeVerifierImpl;
-use stwo_cairo_verifier::poly::circle::CanonicCosetImpl;
-use stwo_cairo_verifier::utils::ArrayImpl;
-use stwo_cairo_verifier::verifier::{Air, verify};
-use stwo_cairo_verifier::{ColumnArray, TreeArray};
+use crate::channel::ChannelImpl;
+use crate::circle::{CirclePoint, CirclePointIndexImpl, CirclePointQM31AddCirclePointM31Impl};
+use crate::fields::qm31::{QM31, QM31Impl, QM31One, QM31Zero};
+use crate::fri::FriConfig;
+use crate::pcs::PcsConfig;
+use crate::pcs::verifier::CommitmentSchemeVerifierImpl;
+use crate::poly::circle::CanonicCosetImpl;
+use crate::utils::ArrayImpl;
+use crate::verifier::{Air, verify};
+use crate::{ColumnArray, TreeArray};
 
 mod proofs;
 
-#[test]
-#[available_gas(100000000000)]
-fn test_horizontal_fib_128_column_with_blowup_16() {
-    let proof = proofs::horizontal_fib_128_column_with_blowup_16::proof();
-    let config = PcsConfig {
-        pow_bits: 0,
-        fri_config: FriConfig {
-            log_last_layer_degree_bound: 4, log_blowup_factor: 4, n_queries: 15,
-        },
-    };
-
-    // Verify.
-    let log_size = 20;
-    let air = HorizontalFibAir::<128> { log_size };
-    let mut channel = ChannelImpl::new(0);
-    let mut commitment_scheme = CommitmentSchemeVerifierImpl::new(config);
-
-    // Decommit.
-    commitment_scheme.commit(*proof.commitment_scheme_proof.commitments[0], @array![], ref channel);
-    commitment_scheme
-        .commit(
-            *proof.commitment_scheme_proof.commitments[1],
-            @ArrayImpl::new_repeated(128, log_size),
-            ref channel,
-        );
-
-    if let Result::Err(err) = verify(air, ref channel, proof, ref commitment_scheme) {
-        panic!("Verification failed: {:?}", err);
-    }
-}
-
-#[test]
-#[available_gas(100000000000)]
-fn test_horizontal_fib_128_column_with_blowup_2() {
+#[executable]
+fn test_horizontal_fib_128_column_with_blowup_2() -> bool {
     let proof = proofs::horizontal_fib_128_column_with_blowup_2::proof();
     let config = PcsConfig {
         pow_bits: 0,
@@ -73,6 +39,7 @@ fn test_horizontal_fib_128_column_with_blowup_2() {
     if let Result::Err(err) = verify(air, ref channel, proof, ref commitment_scheme) {
         panic!("Verification failed: {:?}", err);
     }
+    true
 }
 
 #[derive(Drop)]

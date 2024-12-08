@@ -9,6 +9,7 @@ mod queries;
 pub mod utils;
 pub mod vcs;
 pub mod verifier;
+pub mod tests;
 
 pub use fields::{BaseField, SecureField};
 

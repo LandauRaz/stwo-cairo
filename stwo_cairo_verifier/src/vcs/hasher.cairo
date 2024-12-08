@@ -1,7 +1,35 @@
 use core::array::ArrayTrait;
 use core::hash::HashStateTrait;
-use core::poseidon::{HashState, hades_permutation, poseidon_hash_span};
+use core::poseidon::{HashState, hades_permutation};
 use crate::BaseField;
+
+/// Computes the Poseidon hash on the given input.
+///
+/// Applies the sponge construction to digest many elements.
+/// To distinguish between use cases, the capacity element is initialized to 0.
+/// To distinguish between different input sizes always pads with 1, and possibly with another 0 to
+/// complete to an even-sized input.
+pub fn poseidon_hash_span(mut span: Span<felt252>) -> felt252 {
+    _poseidon_hash_span_inner((0, 0, 0), ref span)
+}
+
+/// Helper function for poseidon_hash_span.
+fn _poseidon_hash_span_inner(
+    state: (felt252, felt252, felt252), ref span: Span<felt252>,
+) -> felt252 {
+    let (s0, s1, s2) = state;
+    let x = *match span.pop_front() {
+        Option::Some(x) => x,
+        Option::None => { return HashState { s0, s1, s2, odd: false }.finalize(); },
+    };
+    let y = *match span.pop_front() {
+        Option::Some(y) => y,
+        Option::None => { return HashState { s0: s0 + x, s1, s2, odd: true }.finalize(); },
+    };
+    let next_state = hades_permutation(s0 + x, s1 + y, s2);
+    _poseidon_hash_span_inner(next_state, ref span)
+}
+
 
 /// 8 M31 elements fit in a hash, since 31*8 = 242 < 252.
 const M31_ELEMENETS_IN_HASH: usize = 8;

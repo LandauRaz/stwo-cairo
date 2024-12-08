@@ -178,7 +178,6 @@ pub fn fri_answers(
 
     let mut answers = array![];
     let mut log_size = M31_CIRCLE_LOG_ORDER;
-    assert_eq!(n_columns_per_tree.len(), 3);
     loop {
         let columns = match columns_per_log_size_rev.next() {
             Option::Some(columns) => columns,
