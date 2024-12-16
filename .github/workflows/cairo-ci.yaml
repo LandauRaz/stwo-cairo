@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./stwo_cairo_verifier
+        working-directory: ./stwo_verifier_core
     steps:
       - uses: actions/checkout@v3
       - uses: software-mansion/setup-scarb@v1
