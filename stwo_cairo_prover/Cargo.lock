@@ -1784,6 +1784,7 @@ dependencies = [
  "rand",
  "rayon",
  "serde",
+ "serde_json",
  "sonic-rs",
  "starknet-ff",
  "stwo-air-utils",
