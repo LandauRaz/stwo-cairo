@@ -811,7 +811,7 @@ mod mappings_tests {
 
         let input = input_from_plain_casm(instructions, false);
         let proof = prove_cairo::<Blake2sMerkleChannel>(input, false, false).unwrap();
-        std::fs::write("/home/ohad/proof/proof.json", serde_json::to_string(&proof).unwrap()).unwrap();
+        std::fs::write("/home/ilya/proof.json", serde_json::to_string(&proof).unwrap()).unwrap();
         verify_cairo::<Blake2sMerkleChannel>(proof).unwrap();
     }
 
