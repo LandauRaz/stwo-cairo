@@ -7,6 +7,7 @@ use super::decode::Instruction;
 use super::memory::{MemoryBuilder, MemoryValue};
 use super::vm_import::TraceEntry;
 
+
 // Small add operands are 27 bits.
 const SMALL_ADD_MAX_VALUE: i32 = 2_i32.pow(27) - 1;
 const SMALL_ADD_MIN_VALUE: i32 = -(2_i32.pow(27));
@@ -666,10 +667,13 @@ fn is_small_mul(op0: MemoryValue, op_1: MemoryValue) -> bool {
 mod mappings_tests {
     use cairo_lang_casm::casm;
     use stwo_prover::core::channel::Blake2sChannel;
-    use stwo_prover::core::vcs::blake2_merkle::Blake2sMerkleChannel;
+    pub use stwo_cairo_serialize::CairoSerialize;
+  
+    use stwo_prover::core::vcs::poseidon252_merkle::Poseidon252MerkleChannel;
 
     use crate::cairo_air::{prove_cairo, verify_cairo};
     use crate::input::plain::input_from_plain_casm;
+
 
     // TODO(Ohad): un-ignore when the opcode is in.
     #[ignore]
@@ -826,11 +830,17 @@ mod mappings_tests {
         .instructions;
 
         let input = input_from_plain_casm(instructions, false);
-        let proof = prove_cairo::<Blake2sMerkleChannel>(input, false, false).unwrap();
-        std::fs::write("/home/ohad/proof/proof.json", serde_json::to_string(&proof).unwrap()).unwrap();
-        verify_cairo::<Blake2sMerkleChannel>(proof).unwrap();
+        let proof = prove_cairo::<Poseidon252MerkleChannel>(input, false, false).unwrap();
+        std::fs::write("/home/ilya/new_orig_proof.json", serde_json::to_string(&proof).unwrap()).unwrap();
+
+        let mut res: Vec<starknet_ff::FieldElement> = vec![];
+        
+        proof.serialize(&mut res);
+        std::fs::write("/home/ilya/new_proof.json", serde_json::to_string(&res).unwrap()).unwrap();
+        verify_cairo::<Poseidon252MerkleChannel>(proof).unwrap();
     }
 
+    
     #[test]
     fn test_jnz_not_taken_fp() {
         let instructions = casm! {

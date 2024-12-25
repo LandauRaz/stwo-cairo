@@ -44,7 +44,7 @@ pub fn input_from_plain_casm(
     runner.initialize(true).expect("Initialization failed");
     runner
         .run_for_steps(
-            1 << 10,
+            (1 << 4) - 2,
             &mut BuiltinHintProcessor::new_empty(),
         )
         .expect("Run failed");
