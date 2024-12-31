@@ -32,29 +32,52 @@ use crate::input::state_transitions::StateTransitions;
 
 #[derive(Serialize, Deserialize, CairoSerialize)]
 pub struct OpcodeClaim {
+    #[serde(skip_serializing)]
     pub add_f_f: Vec<add_opcode_is_small_f_is_imm_f::Claim>,
+    #[serde(skip_serializing)]
     pub add_f_t: Vec<add_opcode_is_small_f_is_imm_t::Claim>,
+    #[serde(skip_serializing)]
     pub add_t_f: Vec<add_opcode_is_small_t_is_imm_f::Claim>,
+    #[serde(skip_serializing)]
     pub add_t_t: Vec<add_opcode_is_small_t_is_imm_t::Claim>,
+    #[serde(skip_serializing)]
     pub add_ap_f_f: Vec<add_ap_opcode_is_imm_f_op_1_base_fp_f::Claim>,
+    #[serde(skip_serializing)]
     pub add_ap_f_t: Vec<add_ap_opcode_is_imm_f_op_1_base_fp_t::Claim>,
+    #[serde(skip_serializing)]
     pub add_ap_t_f: Vec<add_ap_opcode_is_imm_t_op_1_base_fp_f::Claim>,
+    #[serde(skip_serializing)]
     pub assert_eq_f_f: Vec<assert_eq_opcode_is_double_deref_f_is_imm_f::Claim>,
+    #[serde(skip_serializing)]
     pub assert_eq_f_t: Vec<assert_eq_opcode_is_double_deref_f_is_imm_t::Claim>,
+    #[serde(skip_serializing)]
     pub assert_eq_t_f: Vec<assert_eq_opcode_is_double_deref_t_is_imm_f::Claim>,
+    #[serde(skip_serializing)]
     pub call_f_f: Vec<call_opcode_is_rel_f_op_1_base_fp_f::Claim>,
+    #[serde(skip_serializing)]
     pub call_f_t: Vec<call_opcode_is_rel_f_op_1_base_fp_t::Claim>,
+    #[serde(skip_serializing)]
     pub call_t_f: Vec<call_opcode_is_rel_t_op_1_base_fp_f::Claim>,
     pub generic: Vec<generic_opcode::Claim>,
+    #[serde(skip_serializing)]
     pub jnz_f_f: Vec<jnz_opcode_is_taken_f_dst_base_fp_f::Claim>,
+    #[serde(skip_serializing)]
     pub jnz_f_t: Vec<jnz_opcode_is_taken_f_dst_base_fp_t::Claim>,
+    #[serde(skip_serializing)]
     pub jnz_t_f: Vec<jnz_opcode_is_taken_t_dst_base_fp_f::Claim>,
+    #[serde(skip_serializing)]
     pub jnz_t_t: Vec<jnz_opcode_is_taken_t_dst_base_fp_t::Claim>,
+    #[serde(skip_serializing)]
     pub jump_f_f_f: Vec<jump_opcode_is_rel_f_is_imm_f_is_double_deref_f::Claim>,
+    #[serde(skip_serializing)]
     pub jump_f_f_t: Vec<jump_opcode_is_rel_f_is_imm_f_is_double_deref_t::Claim>,
+    #[serde(skip_serializing)]
     pub jump_t_f_f: Vec<jump_opcode_is_rel_t_is_imm_f_is_double_deref_f::Claim>,
+    #[serde(skip_serializing)]
     pub jump_t_t_f: Vec<jump_opcode_is_rel_t_is_imm_t_is_double_deref_f::Claim>,
+    #[serde(skip_serializing)]
     pub mul_f_f: Vec<mul_opcode_is_small_f_is_imm_f::Claim>,
+    #[serde(skip_serializing)]
     pub mul_f_t: Vec<mul_opcode_is_small_f_is_imm_t::Claim>,
     pub ret: Vec<ret_opcode::Claim>,
 }
