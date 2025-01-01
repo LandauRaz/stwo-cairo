@@ -413,6 +413,7 @@ pub fn lookup_sum(
     // Otherwise, the claimed_sum is the total_sum.
     // TODO(Ohad): hide this logic behind `InteractionClaim`, and only sum here.
     sum += interaction_claim.opcodes.sum();
+    println!("sum: {}", sum);
     sum += interaction_claim.verify_instruction.logup_sums.value();
     sum += interaction_claim.range_check_19.claimed_sum;
     sum += interaction_claim.range_check_9_9.claimed_sum;
@@ -421,6 +422,7 @@ pub fn lookup_sum(
     sum += interaction_claim.memory_address_to_id.claimed_sum;
     sum += interaction_claim.memory_id_to_value.big_claimed_sum;
     sum += interaction_claim.memory_id_to_value.small_claimed_sum;
+    println!("sum: {}", sum);
     sum
 }
 

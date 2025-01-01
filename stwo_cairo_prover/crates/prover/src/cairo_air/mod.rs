@@ -9,7 +9,7 @@ use stwo_prover::constraint_framework::preprocessed_columns::gen_is_first;
 use stwo_prover::constraint_framework::relation_tracker::RelationSummary;
 use stwo_prover::core::backend::simd::SimdBackend;
 use stwo_prover::core::backend::BackendForChannel;
-use stwo_prover::core::channel::MerkleChannel;
+use stwo_prover::core::channel::{Channel, MerkleChannel};
 use stwo_prover::core::fields::qm31::SecureField;
 use stwo_prover::core::fri::FriConfig;
 use stwo_prover::core::pcs::{CommitmentSchemeProver, CommitmentSchemeVerifier, PcsConfig};
@@ -151,7 +151,9 @@ pub fn verify_cairo<MC: MerkleChannel>(
     if lookup_sum(&claim, &interaction_elements, &interaction_claim) != SecureField::zero() {
         return Err(CairoVerificationError::InvalidLogupSum);
     }
+    eprintln!("before: {}", channel.draw_felt());
     interaction_claim.mix_into(channel);
+    eprintln!("after: {}", channel.draw_felt());
     commitment_scheme_verifier.commit(stark_proof.commitments[2], &log_sizes[2], channel);
 
     let component_generator =

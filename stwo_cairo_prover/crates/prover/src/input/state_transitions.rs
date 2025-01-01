@@ -808,19 +808,21 @@ mod mappings_tests {
 
     #[test]
     fn test_jrl0() {
-        let instructions = casm! {
-            jmp rel 0;
-        }
-        .instructions;
+        // let instructions = casm! {
+        //     jmp rel 0;
+        // }
+        // .instructions;
 
-        let input = input_from_plain_casm(instructions, false);
-        let proof = prove_cairo::<Poseidon252MerkleChannel>(input, false, false).unwrap();
-        // std::fs::write("/home/ilya/proof.json", serde_json::to_string(&proof).unwrap()).unwrap();
+        // let input = input_from_plain_casm(instructions, false);
+       // let proof = prove_cairo::<Poseidon252MerkleChannel>(input, false, false).unwrap();
+        // std::fs::write("/home/ilya/orig_proof.json", serde_json::to_string(&proof).unwrap()).unwrap();
 
-        let mut res: Vec<starknet_ff::FieldElement> = vec![];
+        let proof = serde_json::from_slice(&std::fs::read("/home/ilya/orig_proof.json").unwrap()).unwrap();
+
+        // let mut res: Vec<starknet_ff::FieldElement> = vec![];
         
-        proof.serialize(&mut res);
-        std::fs::write("/home/ilya/proof.json", serde_json::to_string(&res).unwrap()).unwrap();
+        // proof.serialize(&mut res);
+        // std::fs::write("/home/ilya/proof.json", serde_json::to_string(&res).unwrap()).unwrap();
         verify_cairo::<Poseidon252MerkleChannel>(proof).unwrap();
     }
 
