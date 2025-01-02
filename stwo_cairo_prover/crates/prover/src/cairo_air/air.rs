@@ -96,6 +96,16 @@ impl CairoClaim {
             ]
             .into_iter(),
         );
+
+        println!("{}", (*self.opcodes.log_sizes()[2]).len());
+        println!("{}", (self.verify_instruction.log_sizes()[2]).len());
+        println!("{}", (self.memory_address_to_id.log_sizes()[2]).len());
+        println!("{}", (self.memory_id_to_value.log_sizes()[2]).len());
+        println!("{}", (self.range_check_19.log_sizes()[2]).len());
+        println!("{}", (self.range_check9_9.log_sizes()[2]).len());
+        println!("{}", (self.range_check7_2_5.log_sizes()[2]).len());
+        println!("{}", (self.range_check4_3.log_sizes()[2]).len());
+
         // Overwrite the preprocessed trace log sizes.
         log_sizes[PREPROCESSED_TRACE_IDX] = IS_FIRST_LOG_SIZES.to_vec();
         log_sizes

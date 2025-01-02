@@ -817,7 +817,7 @@ mod mappings_tests {
        // let proof = prove_cairo::<Poseidon252MerkleChannel>(input, false, false).unwrap();
         // std::fs::write("/home/ilya/orig_proof.json", serde_json::to_string(&proof).unwrap()).unwrap();
 
-        let proof = serde_json::from_slice(&std::fs::read("/home/ilya/orig_proof.json").unwrap()).unwrap();
+        let proof = serde_json::from_slice(&std::fs::read("/home/ilya/mod_orig_proof.json").unwrap()).unwrap();
 
         // let mut res: Vec<starknet_ff::FieldElement> = vec![];
         
