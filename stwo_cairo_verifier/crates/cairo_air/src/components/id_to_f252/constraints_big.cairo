@@ -125,43 +125,42 @@ pub fn evaluate_constraints_at_point(
     random_coeff: QM31,
     domain_vanish_at_point_inv: QM31,
 ) {
-    let ConstraintParams {
-        MemoryIdToBig_alpha0,
-        MemoryIdToBig_alpha1,
-        MemoryIdToBig_alpha10,
-        MemoryIdToBig_alpha11,
-        MemoryIdToBig_alpha12,
-        MemoryIdToBig_alpha13,
-        MemoryIdToBig_alpha14,
-        MemoryIdToBig_alpha15,
-        MemoryIdToBig_alpha16,
-        MemoryIdToBig_alpha17,
-        MemoryIdToBig_alpha18,
-        MemoryIdToBig_alpha19,
-        MemoryIdToBig_alpha2,
-        MemoryIdToBig_alpha20,
-        MemoryIdToBig_alpha21,
-        MemoryIdToBig_alpha22,
-        MemoryIdToBig_alpha23,
-        MemoryIdToBig_alpha24,
-        MemoryIdToBig_alpha25,
-        MemoryIdToBig_alpha26,
-        MemoryIdToBig_alpha27,
-        MemoryIdToBig_alpha28,
-        MemoryIdToBig_alpha3,
-        MemoryIdToBig_alpha4,
-        MemoryIdToBig_alpha5,
-        MemoryIdToBig_alpha6,
-        MemoryIdToBig_alpha7,
-        MemoryIdToBig_alpha8,
-        MemoryIdToBig_alpha9,
-        MemoryIdToBig_z,
-        RangeCheck_9_9_alpha0,
-        RangeCheck_9_9_alpha1,
-        RangeCheck_9_9_z,
-        preprocessed_is_first,
-        total_sum,
-    } = params;
+    let ConstraintParams { MemoryIdToBig_alpha0,
+    MemoryIdToBig_alpha1,
+    MemoryIdToBig_alpha10,
+    MemoryIdToBig_alpha11,
+    MemoryIdToBig_alpha12,
+    MemoryIdToBig_alpha13,
+    MemoryIdToBig_alpha14,
+    MemoryIdToBig_alpha15,
+    MemoryIdToBig_alpha16,
+    MemoryIdToBig_alpha17,
+    MemoryIdToBig_alpha18,
+    MemoryIdToBig_alpha19,
+    MemoryIdToBig_alpha2,
+    MemoryIdToBig_alpha20,
+    MemoryIdToBig_alpha21,
+    MemoryIdToBig_alpha22,
+    MemoryIdToBig_alpha23,
+    MemoryIdToBig_alpha24,
+    MemoryIdToBig_alpha25,
+    MemoryIdToBig_alpha26,
+    MemoryIdToBig_alpha27,
+    MemoryIdToBig_alpha28,
+    MemoryIdToBig_alpha3,
+    MemoryIdToBig_alpha4,
+    MemoryIdToBig_alpha5,
+    MemoryIdToBig_alpha6,
+    MemoryIdToBig_alpha7,
+    MemoryIdToBig_alpha8,
+    MemoryIdToBig_alpha9,
+    MemoryIdToBig_z,
+    RangeCheck_9_9_alpha0,
+    RangeCheck_9_9_alpha1,
+    RangeCheck_9_9_z,
+    preprocessed_is_first,
+    total_sum } =
+        params;
 
     let mut trace_1_column_0 = trace_mask_values.pop_front().unwrap().span();
     let trace_1_column_0_offset_0 = *trace_1_column_0.pop_front().unwrap();
@@ -291,6 +290,8 @@ pub fn evaluate_constraints_at_point(
     let mut trace_2_column_61 = interaction_mask_values.pop_front().unwrap().span();
     let trace_2_column_61_offset_neg_1 = *trace_2_column_61.pop_front().unwrap();
     let trace_2_column_61_offset_0 = *trace_2_column_61.pop_front().unwrap();
+
+    core::internal::revoke_ap_tracking();
     let intermediate0 = (RangeCheck_9_9_alpha0) * (trace_1_column_1_offset_0)
         + (RangeCheck_9_9_alpha1) * (trace_1_column_2_offset_0)
         - (RangeCheck_9_9_z);
@@ -515,4 +516,3 @@ pub fn evaluate_constraints_at_point(
     // TODO: Batch `domain_vanish_at_point_inv` multiplication.
     sum = sum * random_coeff + constraint_7 * domain_vanish_at_point_inv;
 }
-

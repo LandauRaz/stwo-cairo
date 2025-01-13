@@ -110,49 +110,48 @@ pub fn evaluate_constraints_at_point(
     random_coeff: QM31,
     domain_vanish_at_point_inv: QM31,
 ) {
-    let ConstraintParams {
-        MemoryAddressToId_alpha0,
-        MemoryAddressToId_alpha1,
-        MemoryAddressToId_z,
-        MemoryIdToBig_alpha0,
-        MemoryIdToBig_alpha1,
-        MemoryIdToBig_alpha2,
-        MemoryIdToBig_alpha3,
-        MemoryIdToBig_alpha4,
-        MemoryIdToBig_alpha5,
-        MemoryIdToBig_alpha6,
-        MemoryIdToBig_alpha7,
-        MemoryIdToBig_z,
-        RangeCheck_4_3_alpha0,
-        RangeCheck_4_3_alpha1,
-        RangeCheck_4_3_z,
-        RangeCheck_7_2_5_alpha0,
-        RangeCheck_7_2_5_alpha1,
-        RangeCheck_7_2_5_alpha2,
-        RangeCheck_7_2_5_z,
-        VerifyInstruction_alpha0,
-        VerifyInstruction_alpha1,
-        VerifyInstruction_alpha10,
-        VerifyInstruction_alpha11,
-        VerifyInstruction_alpha12,
-        VerifyInstruction_alpha13,
-        VerifyInstruction_alpha14,
-        VerifyInstruction_alpha15,
-        VerifyInstruction_alpha16,
-        VerifyInstruction_alpha17,
-        VerifyInstruction_alpha18,
-        VerifyInstruction_alpha2,
-        VerifyInstruction_alpha3,
-        VerifyInstruction_alpha4,
-        VerifyInstruction_alpha5,
-        VerifyInstruction_alpha6,
-        VerifyInstruction_alpha7,
-        VerifyInstruction_alpha8,
-        VerifyInstruction_alpha9,
-        VerifyInstruction_z,
-        preprocessed_is_first,
-        total_sum,
-    } = params;
+    let ConstraintParams { MemoryAddressToId_alpha0,
+    MemoryAddressToId_alpha1,
+    MemoryAddressToId_z,
+    MemoryIdToBig_alpha0,
+    MemoryIdToBig_alpha1,
+    MemoryIdToBig_alpha2,
+    MemoryIdToBig_alpha3,
+    MemoryIdToBig_alpha4,
+    MemoryIdToBig_alpha5,
+    MemoryIdToBig_alpha6,
+    MemoryIdToBig_alpha7,
+    MemoryIdToBig_z,
+    RangeCheck_4_3_alpha0,
+    RangeCheck_4_3_alpha1,
+    RangeCheck_4_3_z,
+    RangeCheck_7_2_5_alpha0,
+    RangeCheck_7_2_5_alpha1,
+    RangeCheck_7_2_5_alpha2,
+    RangeCheck_7_2_5_z,
+    VerifyInstruction_alpha0,
+    VerifyInstruction_alpha1,
+    VerifyInstruction_alpha10,
+    VerifyInstruction_alpha11,
+    VerifyInstruction_alpha12,
+    VerifyInstruction_alpha13,
+    VerifyInstruction_alpha14,
+    VerifyInstruction_alpha15,
+    VerifyInstruction_alpha16,
+    VerifyInstruction_alpha17,
+    VerifyInstruction_alpha18,
+    VerifyInstruction_alpha2,
+    VerifyInstruction_alpha3,
+    VerifyInstruction_alpha4,
+    VerifyInstruction_alpha5,
+    VerifyInstruction_alpha6,
+    VerifyInstruction_alpha7,
+    VerifyInstruction_alpha8,
+    VerifyInstruction_alpha9,
+    VerifyInstruction_z,
+    preprocessed_is_first,
+    total_sum } =
+        params;
 
     let mut trace_1_column_0 = trace_mask_values.pop_front().unwrap().span();
     let trace_1_column_0_offset_0 = *trace_1_column_0.pop_front().unwrap();
@@ -240,6 +239,8 @@ pub fn evaluate_constraints_at_point(
     let mut trace_2_column_40 = interaction_mask_values.pop_front().unwrap().span();
     let trace_2_column_40_offset_neg_1 = *trace_2_column_40.pop_front().unwrap();
     let trace_2_column_40_offset_0 = *trace_2_column_40.pop_front().unwrap();
+
+    core::internal::revoke_ap_tracking();
     let intermediate0 = (RangeCheck_7_2_5_alpha0) * (trace_1_column_20_offset_0)
         + (RangeCheck_7_2_5_alpha1) * (trace_1_column_21_offset_0)
         + (RangeCheck_7_2_5_alpha2) * (trace_1_column_23_offset_0)
@@ -443,4 +444,3 @@ pub fn evaluate_constraints_at_point(
     // TODO: Batch `domain_vanish_at_point_inv` multiplication.
     sum = sum * random_coeff + constraint_20 * domain_vanish_at_point_inv;
 }
-
