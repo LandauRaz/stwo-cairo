@@ -65,14 +65,13 @@ pub fn evaluate_constraints_at_point(
     random_coeff: QM31,
     domain_vanish_at_point_inv: QM31,
 ) {
-    let ConstraintParams {
-        MemoryAddressToId_alpha0,
-        MemoryAddressToId_alpha1,
-        MemoryAddressToId_z,
-        preprocessed_is_first,
-        preprocessed_seq,
-        total_sum,
-    } = params;
+    let ConstraintParams { MemoryAddressToId_alpha0,
+    MemoryAddressToId_alpha1,
+    MemoryAddressToId_z,
+    preprocessed_is_first,
+    preprocessed_seq,
+    total_sum } =
+        params;
     let mut trace_1_column_0 = trace_mask_values.pop_front().unwrap().span();
     let trace_1_column_0_offset_0 = *trace_1_column_0.pop_front().unwrap();
     let mut trace_1_column_1 = trace_mask_values.pop_front().unwrap().span();
@@ -242,6 +241,7 @@ pub fn evaluate_constraints_at_point(
 }
 
 
+#[inline(never)]
 fn intermediates(
     MemoryAddressToId_alpha0: QM31,
     MemoryAddressToId_alpha1: QM31,
@@ -427,4 +427,3 @@ pub fn intermediate7(
         + (MemoryAddressToId_alpha1) * (trace_1_column_14_offset_0)
         - (MemoryAddressToId_z)
 }
-

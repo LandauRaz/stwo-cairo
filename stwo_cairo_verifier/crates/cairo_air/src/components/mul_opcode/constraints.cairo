@@ -1591,6 +1591,7 @@ pub fn evaluate_constraints_at_point(
 }
 
 
+#[inline(never)]
 fn intermediates(
     MemoryAddressToId_alpha0: QM31,
     MemoryAddressToId_alpha1: QM31,

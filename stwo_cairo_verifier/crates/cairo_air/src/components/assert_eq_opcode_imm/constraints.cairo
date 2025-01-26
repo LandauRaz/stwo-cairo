@@ -84,38 +84,37 @@ pub fn evaluate_constraints_at_point(
     random_coeff: QM31,
     domain_vanish_at_point_inv: QM31,
 ) {
-    let ConstraintParams {
-        MemoryAddressToId_alpha0,
-        MemoryAddressToId_alpha1,
-        MemoryAddressToId_z,
-        Opcodes_alpha0,
-        Opcodes_alpha1,
-        Opcodes_alpha2,
-        Opcodes_z,
-        VerifyInstruction_alpha0,
-        VerifyInstruction_alpha1,
-        VerifyInstruction_alpha10,
-        VerifyInstruction_alpha11,
-        VerifyInstruction_alpha12,
-        VerifyInstruction_alpha13,
-        VerifyInstruction_alpha14,
-        VerifyInstruction_alpha15,
-        VerifyInstruction_alpha16,
-        VerifyInstruction_alpha17,
-        VerifyInstruction_alpha18,
-        VerifyInstruction_alpha2,
-        VerifyInstruction_alpha3,
-        VerifyInstruction_alpha4,
-        VerifyInstruction_alpha5,
-        VerifyInstruction_alpha6,
-        VerifyInstruction_alpha7,
-        VerifyInstruction_alpha8,
-        VerifyInstruction_alpha9,
-        VerifyInstruction_z,
-        claimed_sum,
-        preprocessed_is_first,
-        total_sum,
-    } = params;
+    let ConstraintParams { MemoryAddressToId_alpha0,
+    MemoryAddressToId_alpha1,
+    MemoryAddressToId_z,
+    Opcodes_alpha0,
+    Opcodes_alpha1,
+    Opcodes_alpha2,
+    Opcodes_z,
+    VerifyInstruction_alpha0,
+    VerifyInstruction_alpha1,
+    VerifyInstruction_alpha10,
+    VerifyInstruction_alpha11,
+    VerifyInstruction_alpha12,
+    VerifyInstruction_alpha13,
+    VerifyInstruction_alpha14,
+    VerifyInstruction_alpha15,
+    VerifyInstruction_alpha16,
+    VerifyInstruction_alpha17,
+    VerifyInstruction_alpha18,
+    VerifyInstruction_alpha2,
+    VerifyInstruction_alpha3,
+    VerifyInstruction_alpha4,
+    VerifyInstruction_alpha5,
+    VerifyInstruction_alpha6,
+    VerifyInstruction_alpha7,
+    VerifyInstruction_alpha8,
+    VerifyInstruction_alpha9,
+    VerifyInstruction_z,
+    claimed_sum,
+    preprocessed_is_first,
+    total_sum } =
+        params;
     let mut trace_1_column_0 = trace_mask_values.pop_front().unwrap().span();
     let trace_1_column_0_offset_0 = *trace_1_column_0.pop_front().unwrap();
     let mut trace_1_column_1 = trace_mask_values.pop_front().unwrap().span();
@@ -271,6 +270,7 @@ pub fn evaluate_constraints_at_point(
 }
 
 
+#[inline(never)]
 fn intermediates(
     MemoryAddressToId_alpha0: QM31,
     MemoryAddressToId_alpha1: QM31,
@@ -440,4 +440,3 @@ pub fn intermediate4(
         + (Opcodes_alpha2) * (trace_1_column_2_offset_0)
         - (Opcodes_z)
 }
-
