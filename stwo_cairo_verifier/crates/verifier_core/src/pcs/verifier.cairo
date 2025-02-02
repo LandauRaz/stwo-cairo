@@ -10,7 +10,7 @@ use crate::utils::{ArrayImpl, DictImpl};
 use crate::vcs::hasher::PoseidonMerkleHasher;
 use crate::vcs::verifier::{MerkleDecommitment, MerkleVerifier, MerkleVerifierTrait};
 use crate::verifier::{FriVerificationErrorIntoVerificationError, VerificationError};
-use crate::{ColumnArray, TreeArray};
+use crate::{ColumnArray, ColumnSpan, TreeArray, TreeSpan};
 use super::PcsConfig;
 
 // TODO(andrew): Change all `Array` types to `Span`.
@@ -18,7 +18,7 @@ use super::PcsConfig;
 pub struct CommitmentSchemeProof {
     pub commitments: TreeArray<felt252>,
     /// Sampled mask values.
-    pub sampled_values: TreeArray<ColumnArray<Array<QM31>>>,
+    pub sampled_values: TreeSpan<ColumnSpan<Span<QM31>>>,
     pub decommitments: TreeArray<MerkleDecommitment<PoseidonMerkleHasher>>,
     /// All queried trace values.
     pub queried_values: TreeArray<Span<M31>>,
@@ -45,7 +45,7 @@ pub impl CommitmentSchemeVerifierImpl of CommitmentSchemeVerifierTrait {
         let mut res = array![];
         for tree in self.trees.span() {
             res.append(tree.column_log_sizes);
-        };
+        }
         res
     }
 
@@ -62,7 +62,7 @@ pub impl CommitmentSchemeVerifierImpl of CommitmentSchemeVerifierTrait {
         let mut extended_log_sizes = array![];
         for log_size in log_sizes {
             extended_log_sizes.append(*log_size + self.config.fri_config.log_blowup_factor);
-        };
+        }
         self
             .trees
             .append(MerkleVerifier { root: commitment, column_log_sizes: extended_log_sizes });
@@ -85,13 +85,13 @@ pub impl CommitmentSchemeVerifierImpl of CommitmentSchemeVerifierTrait {
 
         let mut flattened_sampled_values = array![];
 
-        for sampled_values in sampled_values.span() {
-            for column_sampled_values in sampled_values.span() {
-                for sampled_value in column_sampled_values.span() {
+        for sampled_values in sampled_values {
+            for column_sampled_values in *sampled_values {
+                for sampled_value in *column_sampled_values {
                     flattened_sampled_values.append(*sampled_value);
                 };
             };
-        };
+        }
 
         channel.mix_felts(flattened_sampled_values.span());
 
@@ -107,6 +107,8 @@ pub impl CommitmentSchemeVerifierImpl of CommitmentSchemeVerifierTrait {
             Result::Ok(fri_verifier) => fri_verifier,
             Result::Err(err) => { return Result::Err(VerificationError::Fri(err)); },
         };
+
+        println!("did fri commit");
 
         // Verify proof of work.
         channel.mix_nonce(proof_of_work_nonce);
@@ -146,6 +148,7 @@ pub impl CommitmentSchemeVerifierImpl of CommitmentSchemeVerifierTrait {
 
             tree_i += 1;
         }?;
+        println!("froyo");
 
         // Check iterators have been fully consumed.
         assert!(decommitments.next().is_none());
@@ -160,6 +163,7 @@ pub impl CommitmentSchemeVerifierImpl of CommitmentSchemeVerifierTrait {
             query_positions_by_log_size,
             queried_values,
         )?;
+        println!("got answers");
 
         if let Result::Err(err) = fri_verifier.decommit(fri_answers) {
             return Result::Err(VerificationError::Fri(err));
@@ -185,7 +189,7 @@ fn get_column_log_bounds(
             assert!(column_log_bound <= MAX_LOG_BOUND);
             bounds_set.insert(column_log_bound.into(), true);
         };
-    };
+    }
 
     let mut bounds = array![];
 
@@ -195,7 +199,7 @@ fn get_column_log_bounds(
             bounds.append(i);
         }
         i -= 1;
-    };
+    }
 
     bounds
 }
@@ -203,7 +207,7 @@ fn get_column_log_bounds(
 #[inline]
 fn get_flattened_samples(
     sampled_points: TreeArray<ColumnArray<Array<CirclePoint<QM31>>>>,
-    sampled_values: TreeArray<ColumnArray<Array<QM31>>>,
+    sampled_values: TreeSpan<ColumnSpan<Span<QM31>>>,
 ) -> ColumnArray<Array<PointSample>> {
     let mut res = array![];
     let n_trees = sampled_points.len();
@@ -212,14 +216,14 @@ fn get_flattened_samples(
     let mut tree_i = 0;
     while tree_i < n_trees {
         let tree_points = sampled_points[tree_i];
-        let tree_values = sampled_values[tree_i];
+        let tree_values = *sampled_values[tree_i];
         assert!(tree_points.len() == tree_values.len());
         let n_columns = tree_points.len();
 
         let mut column_i = 0;
         while column_i < n_columns {
             let column_points = tree_points[column_i];
-            let column_values = tree_values[column_i];
+            let column_values = *tree_values[column_i];
 
             let n_samples = column_points.len();
             assert!(column_points.len() == column_values.len());
@@ -231,13 +235,13 @@ fn get_flattened_samples(
                 let value = *column_values[sample_i];
                 column_samples.append(PointSample { point, value });
                 sample_i += 1;
-            };
+            }
 
             res.append(column_samples);
             column_i += 1;
-        };
+        }
 
         tree_i += 1;
-    };
+    }
     res
 }

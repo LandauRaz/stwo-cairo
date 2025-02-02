@@ -37,12 +37,84 @@ pub struct ConstraintParams {
 
 pub fn evaluate_constraints_at_point(
     ref sum: QM31,
-    ref trace_mask_values: ColumnSpan<Array<QM31>>,
-    ref interaction_mask_values: ColumnSpan<Array<QM31>>,
+    ref trace_mask_values: ColumnSpan<Span<QM31>>,
+    ref interaction_mask_values: ColumnSpan<Span<QM31>>,
     params: ConstraintParams,
     random_coeff: QM31,
     domain_vanish_at_point_inv: QM31,
-) {}
+) {
+    let ConstraintParams {
+        RangeCheck_4_3_alpha0, RangeCheck_4_3_alpha1, RangeCheck_4_3_z, claimed_sum,
+    } = params;
+    let [trace_1_column_0, trace_1_column_1, trace_1_column_2]: [Span<QM31>; 3] =
+        (*trace_mask_values
+        .multi_pop_front()
+        .unwrap())
+        .unbox();
+
+    let [trace_1_column_0_offset_0]: [QM31; 1] = (*trace_1_column_0.try_into().unwrap()).unbox();
+
+    let [trace_1_column_1_offset_0]: [QM31; 1] = (*trace_1_column_1.try_into().unwrap()).unbox();
+
+    let [trace_1_column_2_offset_0]: [QM31; 1] = (*trace_1_column_2.try_into().unwrap()).unbox();
+
+    let [trace_2_column_3, trace_2_column_4, trace_2_column_5, trace_2_column_6]: [Span<QM31>; 4] =
+        (*interaction_mask_values
+        .multi_pop_front()
+        .unwrap())
+        .unbox();
+
+    let [trace_2_column_3_offset_neg_1, trace_2_column_3_offset_0]: [QM31; 2] = (*trace_2_column_3
+        .try_into()
+        .unwrap())
+        .unbox();
+
+    let [trace_2_column_4_offset_neg_1, trace_2_column_4_offset_0]: [QM31; 2] = (*trace_2_column_4
+        .try_into()
+        .unwrap())
+        .unbox();
+
+    let [trace_2_column_5_offset_neg_1, trace_2_column_5_offset_0]: [QM31; 2] = (*trace_2_column_5
+        .try_into()
+        .unwrap())
+        .unbox();
+
+    let [trace_2_column_6_offset_neg_1, trace_2_column_6_offset_0]: [QM31; 2] = (*trace_2_column_6
+        .try_into()
+        .unwrap())
+        .unbox();
+
+    core::internal::revoke_ap_tracking();
+
+    let mut intermediates = intermediates(
+        RangeCheck_4_3_alpha0,
+        RangeCheck_4_3_alpha1,
+        RangeCheck_4_3_z,
+        trace_1_column_0_offset_0,
+        trace_1_column_1_offset_0,
+    )
+        .span();
+    let intermediate0 = *intermediates.pop_front().unwrap();
+
+    // Constrait 0
+    let constraint_quotient = ((QM31Impl::from_partial_evals(
+        [
+            trace_2_column_3_offset_0, trace_2_column_4_offset_0, trace_2_column_5_offset_0,
+            trace_2_column_6_offset_0,
+        ],
+    )
+        - (QM31Impl::from_partial_evals(
+            [
+                trace_2_column_3_offset_neg_1, trace_2_column_4_offset_neg_1,
+                trace_2_column_5_offset_neg_1, trace_2_column_6_offset_neg_1,
+            ],
+        ))
+        + (claimed_sum) * (qm31(32768, 0, 0, 0)))
+        * (intermediate0)
+        - (-(trace_1_column_2_offset_0)))
+        * domain_vanish_at_point_inv;
+    sum = sum * random_coeff + constraint_quotient;
+}
 
 
 fn intermediates(

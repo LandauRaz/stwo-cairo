@@ -1,5 +1,6 @@
 use core::dict::{Felt252Dict, Felt252DictTrait};
 use core::nullable::{Nullable, NullableTrait};
+use stwo_verifier_core::ColumnSpan;
 use stwo_verifier_core::channel::{Channel, ChannelImpl};
 use stwo_verifier_core::fields::m31::M31;
 use stwo_verifier_core::fields::qm31::{QM31, QM31Impl, QM31One, QM31Zero};
@@ -28,7 +29,7 @@ pub impl LookupElementsImpl<const N: usize> of LookupElementsTrait<N> {
         for _ in 1..N {
             acc *= alpha;
             alpha_powers.append(acc);
-        };
+        }
 
         LookupElements { z, alpha, alpha_powers }
     }
@@ -43,7 +44,7 @@ pub impl LookupElementsImpl<const N: usize> of LookupElementsTrait<N> {
         while let (Option::Some(alpha), Option::Some(value)) =
             (alpha_powers.pop_front(), values_span.pop_front()) {
             sum += (*alpha).mul_m31(*value);
-        };
+        }
 
         sum
     }
@@ -85,13 +86,13 @@ pub struct PreprocessedMaskValues {
 #[generate_trait]
 pub impl PreprocessedMaskValuesImpl of PreprocessedMaskValuesTrait {
     fn new(
-        mut preprocessed_mask_values: Span<Array<QM31>>,
+        mut preprocessed_mask_values: ColumnSpan<Span<QM31>>,
         preprocessed_columns: Span<PreprocessedColumn>,
     ) -> PreprocessedMaskValues {
         let mut values: Felt252Dict<Nullable<QM31>> = Default::default();
 
         for preprocessed_column in preprocessed_columns {
-            let mut column_mask_values = preprocessed_mask_values.pop_front().unwrap().span();
+            let mut column_mask_values = *preprocessed_mask_values.pop_front().unwrap();
             if let Option::Some(mask_value) = column_mask_values.pop_front() {
                 values
                     .insert(
@@ -99,7 +100,7 @@ pub impl PreprocessedMaskValuesImpl of PreprocessedMaskValuesTrait {
                         NullableTrait::new(*mask_value),
                     );
             }
-        };
+        }
 
         assert!(preprocessed_mask_values.is_empty());
 
