@@ -806,6 +806,7 @@ fn intermediates(
         trace_1_column_0_offset_0,
         trace_1_column_22_offset_0,
     );
+    core::internal::revoke_ap_tracking();
 
     let intermediate6 = intermediate6(
         MemoryIdToBig_alpha0,
@@ -1160,4 +1161,3 @@ pub fn intermediate8(
         + (Opcodes_alpha2) * (trace_1_column_2_offset_0)
         - (Opcodes_z)
 }
-

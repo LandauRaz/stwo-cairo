@@ -1,5 +1,5 @@
 use core::iter::{IntoIterator, Iterator};
-use crate::circle::{CirclePoint, CirclePointIndexImpl, CirclePointTrait, Coset, CosetImpl};
+use crate::circle::{CirclePoint, CirclePointIndexImpl, Coset, CosetImpl};
 use crate::fields::m31::{M31, m31};
 use crate::fields::qm31::{QM31, QM31Impl, QM31Zero};
 use crate::fields::{BaseField, SecureField};
@@ -186,13 +186,16 @@ pub impl LineDomainImpl of LineDomainTrait {
             // If the coset with two points contains (0, y) then the coset is {(0, y), (0, -y)}.
             assert!(!coset.at(0).x.is_zero(), "coset x-coordinates not unique");
         } else if (coset_size > 2) {
+
+        
             // Let our coset be `E = c + <G>` with `|E| > 2` then:
             // 1. if `ord(c) <= ord(G)` the coset contains two points at x=0
             // 2. if `ord(c) = 2 * ord(G)` then `c` and `-c` are in our coset
-            assert!(
-                coset.initial_index.to_point().log_order() >= coset.log_size + 2,
-                "coset x-coordinates not unique",
-            );
+            // TODO(ilya): Uncomment the following assert once the compiler is fixed.
+            // assert!(
+            //     coset.initial_index.to_point().log_order() >= coset.log_size + 2,
+            //     "coset x-coordinates not unique",
+            // );
         }
         LineDomain { coset: coset }
     }

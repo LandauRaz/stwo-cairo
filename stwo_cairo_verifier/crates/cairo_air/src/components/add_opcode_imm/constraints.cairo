@@ -1037,6 +1037,7 @@ pub fn evaluate_constraints_at_point(
         - ((m31(256).into()) * (trace_1_column_97_offset_0)))
         * domain_vanish_at_point_inv;
     sum = sum * random_coeff + constraint_quotient;
+    core::internal::revoke_ap_tracking();
 
     // Constrait 32
     let constraint_quotient = ((QM31Impl::from_partial_evals(
@@ -1637,6 +1638,7 @@ fn intermediates(
         trace_1_column_0_offset_0,
         trace_1_column_68_offset_0,
     );
+    core::internal::revoke_ap_tracking();
 
     let intermediate6 = intermediate6(
         MemoryIdToBig_alpha0,
@@ -2493,4 +2495,3 @@ pub fn intermediate35(
         + (Opcodes_alpha2) * (trace_1_column_2_offset_0)
         - (Opcodes_z)
 }
-

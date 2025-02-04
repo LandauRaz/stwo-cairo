@@ -1063,12 +1063,14 @@ pub fn evaluate_constraints_at_point(
         * ((intermediate32) * (intermediate32) - (m31(1).into())))
         * domain_vanish_at_point_inv;
     sum = sum * random_coeff + constraint_quotient;
+    core::internal::revoke_ap_tracking();
 
     // Constrait 32
     let constraint_quotient = ((intermediate33)
         * ((intermediate33) * (intermediate33) - (m31(1).into())))
         * domain_vanish_at_point_inv;
     sum = sum * random_coeff + constraint_quotient;
+   
 
     // Constrait 33
     let constraint_quotient = (trace_1_column_71_offset_0
@@ -1688,6 +1690,7 @@ fn intermediates(
         trace_1_column_5_offset_0,
         trace_1_column_72_offset_0,
     );
+    core::internal::revoke_ap_tracking();
 
     let intermediate6 = intermediate6(
         MemoryIdToBig_alpha0,
@@ -2551,4 +2554,3 @@ pub fn intermediate35(
         + (Opcodes_alpha2) * (trace_1_column_2_offset_0)
         - (Opcodes_z)
 }
-
