@@ -61,7 +61,7 @@ Then, navigate into the `cairo-prove` directory, build it, and add its binary to
 ```
 cd cairo-prove
 ./build.sh
-sudo cp target/release/prove-cairo /usr/local/bin/
+sudo cp target/release/cairo-prove /usr/local/bin/
 ```
 
 *Note: Adding the binary to your path is optional but highly recommended, as otherwise `cairo-prove`'s path needs to be specified each time it is used.*
