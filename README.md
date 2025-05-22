@@ -41,7 +41,7 @@ In particular:
   
 ## Using Stwo to prove Cairo programs
 
-First, clone this repo, build the `prove-cairo` project, and add its binary to your PATH:
+First, clone this repo, build the `cairo-prove` project, and add its binary to your PATH:
 
 ```
 git clone https://github.com/starkware-libs/stwo-cairo.git
