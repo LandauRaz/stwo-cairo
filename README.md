@@ -16,7 +16,7 @@ Prove Cairo programs with the blazing-fast [Stwo prover](https://github.com/star
 
 ## Disclaimer
 
-⚠️ Stwo is work in progress and should be used at your own risk ⚠️
+⚠️ Stwo is a work in progress and should be used at your own risk ⚠️
 
 In particular:
 
@@ -48,7 +48,7 @@ git clone https://github.com/starkware-libs/stwo-cairo.git
 cd stwo-cairo
 ```
 
-Next, check out to the `ohad/ursus` branch:
+Next, check out the `ohad/ursus` branch:
 
 ```
 git checkout ohad/ursus
@@ -73,7 +73,7 @@ sudo cp target/release/cairo-prove /usr/local/bin/
 
 ## Usage
 
-To prove an execution of a Cairo program you must first create its executable. To do so, navigate to its project's directory and run:
+To prove an execution of a Cairo program you must first create its executable. To do so, navigate to its directory and run:
 
 ```
 scarb build
@@ -170,12 +170,12 @@ This padding exists for legacy reasons and will be removed in a future version, 
 
 ### Pedersen
 
-When the [Pedersen builtin](https://book.cairo-lang.org/ch204-02-01-pedersen.html) is used in an execution of a program, additional pre-processed columns need to be added to its proof.
+When the [Pedersen builtin](https://book.cairo-lang.org/ch204-02-01-pedersen.html) is used in an execution of a program, additional preprocessed columns need to be added to its proof.
 
 This variant is automatically deduced by `cairo-prove prove`, but requires adding the `--with-pedersen` option to `cairo-prove verify`.
 
 ## `scarb prove`
 
-As of Scarb version 2.10.0, it is possible to use `scarb prove` instead of building and running `stwo-cairo` on your own.
+As of Scarb version 2.10.0, `scarb prove` can be used instead of manually building and running `stwo-cairo`.
 
 However, `scarb prove` is still a work in progress, and using `stwo-cairo` directly is preferable for now.
