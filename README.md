@@ -16,7 +16,7 @@ Prove Cairo programs with the blazing-fast [Stwo prover](https://github.com/star
 
 ## Disclaimer
 
-⚠️ Stwo is work in progress and should be used at your own risk ⚠️
+⚠️ Stwo is a work in progress and should be used at your own risk ⚠️
 
 In particular:
 
@@ -170,7 +170,7 @@ This padding exists for legacy reasons and will be removed in a future version, 
 
 ### Pedersen
 
-When the [Pedersen builtin](https://book.cairo-lang.org/ch204-02-01-pedersen.html) is used in an execution of a program, additional pre-processed columns need to be added to its proof.
+When the [Pedersen builtin](https://book.cairo-lang.org/ch204-02-01-pedersen.html) is used in an execution of a program, additional preprocessed columns need to be added to its proof.
 
 This variant is automatically deduced by `cairo-prove prove`, but requires adding the `--with-pedersen` option to `cairo-prove verify`.
 
@@ -178,4 +178,4 @@ This variant is automatically deduced by `cairo-prove prove`, but requires addin
 
 As of Scarb version 2.10.0, `scarb prove` can be used instead of manually building and running `stwo-cairo`.
 
-However, `scarb prove` is still work in progress, and using `stwo-cairo` directly is preferable for now.
+However, `scarb prove` is still a work in progress, and using `stwo-cairo` directly is preferable for now.
