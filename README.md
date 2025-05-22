@@ -108,7 +108,7 @@ cairo-prove verify <path-to-proof-file> --with-pedersen
 
 ### Example
 
-The following can be used inside the `cairo-prove/example` directory to create an executable of [cairo-prove/example/lib.cairo](cairo-prove/example/lib.cairo), prove its execution, and verify the proof:
+The following can be used inside the `cairo-prove/example` directory to create an executable of [cairo-prove/example/src/lib.cairo](cairo-prove/example/src/lib.cairo), prove its execution, and verify the proof:
 
 ```terminal
 scarb build
