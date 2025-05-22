@@ -47,7 +47,7 @@ First, clone this repo, build the `cairo-prove` project, and add its binary to y
 git clone https://github.com/starkware-libs/stwo-cairo.git
 cd stwo-cairo/cairo-prove
 ./build.sh
-sudo cp target/release/cairo-prove /usr/local/bin/
+sudo cp target/release/prove-cairo /usr/local/bin/
 ```
 
 *Note: Adding the binary to your path is optional but highly recommended, as otherwise `cairo-prove`'s path needs to be specified each time it is used.*
