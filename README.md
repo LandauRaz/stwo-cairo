@@ -4,13 +4,13 @@ Prove Cairo programs with the blazing-fast [Stwo prover](https://github.com/star
 
 * [Disclaimer](#disclaimer)
 * [Prerequisites](#prerequisites)
-* [Using Stwo to prove Cairo programs](#using-stwo-to-prove-cairo-programs)
+* [Usage](#usage)
   * [Example](#example)
-* [Input format](#input-format)
+* [Inputs](#inputs)
 * [Limitations](#limitations)
   * [Gas](#gas)
   * [Syscalls](#syscalls)
-  * [Padding overhead](#padding-overhead)
+  * [Padding](#padding)
   * [Pedersen](#pedersen)
 * [`scarb-prove`](#scarb-prove)
 
@@ -24,31 +24,54 @@ In particular:
 
 * Breaking API changes are might happen often
 
-# Prerequisites
+## Prerequisites
 
 - [Rust](https://www.rust-lang.org/tools/install/)
 
-  - See [`rust-toolchain.toml`](.rust-toolchain.toml) for the specific version
+  - See [`cairo-prove/rust-toolchain.toml`](cairo-prove/rust-toolchain.toml) for the specific version
 - [Scarb](https://docs.swmansion.com/scarb/download.html)
   - The recommended installation method is using [asdf](https://asdf-vm.com/)
   - Make sure to use version 2.10.0 and onwards, and preferably the latest nightly version.
   
     To use the latest nightly version, run:
     
-    `asdf set -u scarb latest:nightly`
-  
-## Using Stwo to prove Cairo programs
+    ```
+    asdf set -u scarb latest:nightly
+    ```
 
-First, clone this repo, build the `prove-cairo` project, and add its binary to your PATH:
+## Installation
+
+First, clone this repo and navigate into its directory:
 
 ```
 git clone https://github.com/starkware-libs/stwo-cairo.git
-cd stwo-cairo/cairo-prove
+cd stwo-cairo
+```
+
+Next, checkout to the `ohad/ursus` branch:
+
+```
+git checkout ohad/ursus
+```
+
+*Note: This part is to be removed when `ohad/ursus` is merged.*
+
+Then, navigate into the `cairo-prove` directory and build the project:
+
+```
+cd cairo-prove
 ./build.sh
+```
+
+Finally, add the `cairo-prove` binary to your PATH:
+
+```
 sudo cp target/release/cairo-prove /usr/local/bin/
 ```
 
 *Note: Adding the binary to your path is optional but highly recommended, as otherwise `cairo-prove`'s path needs to be specified each time it is used.*
+
+## Usage
 
 To prove an execution of a Cairo program you must first create its executable. To do so, navigate to the project's directory and run:
 
@@ -56,7 +79,7 @@ To prove an execution of a Cairo program you must first create its executable. T
 scarb build
 ```
 
-To generate a proof for an execution of an executable, run:
+To generate a proof for an execution of a program's executable, run:
 
 ```
 cairo-prove prove <path-to-executable> <path-to-output> --arguments <args>
@@ -67,7 +90,7 @@ or:
 cairo-prove prove <path-to-executable> <path-to-output-file> --arguments-file <path-to-args-file>
 ```
 
-*Note: For information about the formats of `arguments` and `arguments-file`, see [Input format](#input-format).*
+*Note: For information about the formats of `arguments` and `arguments-file`, see [Inputs](#inputs).*
 
 To verify a proof, run:
 
@@ -75,17 +98,17 @@ To verify a proof, run:
 cairo-prove verify <path-to-proof-file>
 ```
 
-or, if the Pedersen hash is used in the proof:
+or, if the Pedersen builtin is used in the proof:
 
 ```
 cairo-prove verify <path-to-proof-file> --with-pedersen
 ```
 
-*Note: To learn more about using the Pedersen hash, see [Pedersen](#pedersen).*
+*Note: To learn more about the effects of the Pedersen builtin, see [Pedersen](#pedersen).*
 
 ### Example
 
-The following can be used inside the `cairo-prove/example` directory to create an executable of [cairo-prove/example/lib.cairo](cairo-prove/example/lib.cairo), prove its execution, and verify the proof:
+The following can be used inside the `cairo-prove/example` directory to create an executable of [cairo-prove/example/src/lib.cairo](cairo-prove/example/src/lib.cairo), prove its execution, and verify the proof:
 
 ```terminal
 scarb build
@@ -112,7 +135,7 @@ Finished `dev` profile target(s) in 4 seconds
 [2025-05-27T10:26:02Z INFO  cairo_prove] Verification successful
 ```
 
-## Input format
+## Inputs
 
 The expected input provided to `cairo-prove prove` using the `--arguments` option is a comma-separated list of integers. This list should correspond to the [serialization](https://docs.starknet.io/architecture-and-concepts/smart-contracts/serialization-of-cairo-types/) of the `main` function’s arguments, for example:
 
@@ -139,7 +162,7 @@ This limitation exist because gas tracking introduces a computation overhead, wh
 
 Executable cannot be created from programs that use [syscalls](https://book.cairo-lang.org/appendix-08-system-calls.html), either directly or via functions from [the Cairo Core library](https://docs.cairo-lang.org/core/) that use syscalls (such as `sha256`, `keccak`, and `secp256k1`/`secp256r1` operations).
 
-### Padding overhead
+### Padding
 
 Execution resources (the number of steps and builtin invocations) are currently padded to the of next power of 2, w.r.t to the ratios in the [`all_cairo` layout](https://github.com/lambdaclass/cairo-vm/blob/15bf79470cdd8eff29f41fc0a87143dce5499c7e/vm/src/types/instance_definitions/builtins_instance_def.rs#L157).
 
@@ -147,7 +170,7 @@ This padding exists for legacy reasons and will be removed in a future version, 
 
 ### Pedersen
 
-When the Pedersen hash is used in an execution of a program, additional pre-processed columns need to be added to its proof.
+When the [Pedersen builtin](https://book.cairo-lang.org/ch204-02-01-pedersen.html#pedersen-builtin) is used in an execution of a program, additional pre-processed columns need to be added to its proof.
 
 This variant is automatically deduced by `cairo-prove prove`, but requires adding the `--with-pedersen` option to `cairo-prove verify`.
 
