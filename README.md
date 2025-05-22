@@ -170,7 +170,7 @@ This padding exists for legacy reasons and will be removed in a future version, 
 
 ### Pedersen
 
-When the [Pedersen builtin](https://book.cairo-lang.org/ch204-02-01-pedersen.html#pedersen-builtin) is used in an execution of a program, additional pre-processed columns need to be added to its proof.
+When the [Pedersen builtin](https://book.cairo-lang.org/ch204-02-01-pedersen.html) is used in an execution of a program, additional pre-processed columns need to be added to its proof.
 
 This variant is automatically deduced by `cairo-prove prove`, but requires adding the `--with-pedersen` option to `cairo-prove verify`.
 
