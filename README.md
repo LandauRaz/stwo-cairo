@@ -22,7 +22,7 @@ In particular:
 
 * Stwo is not yet sound
 
-* Breaking API changes are might happen often
+* Breaking API changes might happen often
 
 ## Prerequisites
 
