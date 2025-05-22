@@ -156,7 +156,7 @@ When using the `--arguments-file` option, the expected content of the file is an
 
 Executables must be created with the `enable-gas = false` config in project's `Scarb.toml` file (e.g., [cairo-prove/example/Scarb.toml](cairo-prove/example/Scarb.toml)).
 
-This limitation exist because gas tracking introduces a computation overhead, which does not make sense in non-Starknet contexts.
+This limitation exist because gas tracking introduces computation overhead, which does not make sense in non-Starknet contexts.
 
 ### Syscalls
 
@@ -178,4 +178,4 @@ This variant is automatically deduced by `cairo-prove prove`, but requires addin
 
 As of Scarb version 2.10.0, it is possible to use `scarb prove` instead of building and running `stwo-cairo` on your own.
 
-However, `scarb prove` is still a work in progress, and using `stwo-cairo` directly is still preferable for now.
+However, `scarb prove` is still a work in progress, and using `stwo-cairo` directly is preferable for now.
