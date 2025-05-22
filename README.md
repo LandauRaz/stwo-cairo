@@ -22,7 +22,7 @@ In particular:
 
 * Stwo is not yet sound
 
-* Breaking API changes are might happen often
+* Breaking API changes might happen often
 
 ## Prerequisites
 
@@ -48,7 +48,7 @@ git clone https://github.com/starkware-libs/stwo-cairo.git
 cd stwo-cairo
 ```
 
-Next, checkout to the `ohad/ursus` branch:
+Next, check out to the `ohad/ursus` branch:
 
 ```
 git checkout ohad/ursus
