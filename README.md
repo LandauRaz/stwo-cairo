@@ -160,7 +160,7 @@ This limitation exists because gas tracking introduces computational overhead, w
 
 ### Syscalls
 
-Executable cannot be created from programs that use [syscalls](https://book.cairo-lang.org/appendix-08-system-calls.html), either directly or via functions from [the Cairo Core library](https://docs.cairo-lang.org/core/) that use syscalls (such as `sha256`, `keccak`, and `secp256k1`/`secp256r1` operations).
+Executables cannot be created from programs that use [syscalls](https://book.cairo-lang.org/appendix-08-system-calls.html), either directly or via functions from [the Cairo Core library](https://docs.cairo-lang.org/core/) that use syscalls (such as `sha256`, `keccak`, and `secp256k1`/`secp256r1` operations).
 
 ### Padding
 
