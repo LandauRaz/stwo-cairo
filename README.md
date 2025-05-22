@@ -4,7 +4,7 @@ Prove Cairo programs with the blazing-fast [Stwo prover](https://github.com/star
 
 * [Disclaimer](#disclaimer)
 * [Prerequisites](#prerequisites)
-* [Using Stwo to prove Cairo programs](#using-stwo-to-prove-cairo-programs)
+* [Usage](#usage)
   * [Example](#example)
 * [Input format](#input-format)
 * [Limitations](#limitations)
