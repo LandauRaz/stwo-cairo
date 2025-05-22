@@ -59,8 +59,9 @@ git checkout ohad/ursus
 Then, navigate into the `cairo-prove` directory, build it, and add its binary to your PATH:
 
 ```
-cairo-prove/build.sh
-sudo cp cairo-prove/target/release/prove-cairo /usr/local/bin/
+cd cairo-prove
+./build.sh
+sudo cp target/release/prove-cairo /usr/local/bin/
 ```
 
 *Note: Adding the binary to your path is optional but highly recommended, as otherwise `cairo-prove`'s path needs to be specified each time it is used.*
