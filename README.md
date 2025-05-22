@@ -41,12 +41,12 @@ In particular:
 
 ## Installation
 
-First, clone this repo:
+First, clone this repo and navigate into it:
 
 ```
 git clone https://github.com/starkware-libs/stwo-cairo.git
+cd stwo-cairo
 ```
-
 
 Next, checkout to the `ohad/ursus` branch:
 
@@ -59,9 +59,8 @@ git checkout ohad/ursus
 Then, build the `cairo-prove` project and add its binary to your PATH:
 
 ```
-cd stwo-cairo/cairo-prove
-./build.sh
-sudo cp target/release/prove-cairo /usr/local/bin/
+cairo-prove/build.sh
+sudo cp cairo-prove/target/release/prove-cairo /usr/local/bin/
 ```
 
 *Note: Adding the binary to your path is optional but highly recommended, as otherwise `cairo-prove`'s path needs to be specified each time it is used.*
