@@ -65,6 +65,10 @@ cd cairo-prove
 
 Finally, add the `cairo-prove` binary to your PATH:
 
+```
+sudo cp target/release/cairo-prove /usr/local/bin/
+```
+
 *Note: Adding the binary to your path is optional but highly recommended, as otherwise `cairo-prove`'s path needs to be specified each time it is used.*
 
 ## Usage
