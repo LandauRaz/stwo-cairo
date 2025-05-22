@@ -35,7 +35,9 @@ In particular:
   
     To use the latest nightly version, run:
     
-    `asdf set -u scarb latest:nightly`
+    ```
+    asdf set -u scarb latest:nightly
+    ```
   
 ## Using Stwo to prove Cairo programs
 
