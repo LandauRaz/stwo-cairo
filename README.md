@@ -10,7 +10,7 @@ Prove Cairo programs with the blazing-fast [Stwo prover](https://github.com/star
 * [Limitations](#limitations)
   * [Gas](#gas)
   * [Syscalls](#syscalls)
-  * [Padding overhead](#padding-overhead)
+  * [Padding](#padding)
   * [Pedersen](#pedersen)
 * [`scarb-prove`](#scarb-prove)
 
@@ -157,7 +157,7 @@ This limitation exist because gas tracking introduces a computation overhead, wh
 
 Executable cannot be created from programs that use [syscalls](https://book.cairo-lang.org/appendix-08-system-calls.html), either directly or via functions from [the Cairo Core library](https://docs.cairo-lang.org/core/) that use syscalls (such as `sha256`, `keccak`, and `secp256k1`/`secp256r1` operations).
 
-### Padding overhead
+### Padding
 
 Execution resources (the number of steps and builtin invocations) are currently padded to the of next power of 2, w.r.t to the ratios in the [`all_cairo` layout](https://github.com/lambdaclass/cairo-vm/blob/15bf79470cdd8eff29f41fc0a87143dce5499c7e/vm/src/types/instance_definitions/builtins_instance_def.rs#L157).
 
