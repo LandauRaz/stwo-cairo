@@ -164,7 +164,7 @@ Executable cannot be created from programs that use [syscalls](https://book.cair
 
 ### Padding
 
-Execution resources (the number of steps and builtin invocations) are currently padded to the of next power of 2, w.r.t to the ratios in the [`all_cairo` layout](https://github.com/lambdaclass/cairo-vm/blob/15bf79470cdd8eff29f41fc0a87143dce5499c7e/vm/src/types/instance_definitions/builtins_instance_def.rs#L157).
+Execution resources (the number of steps and builtin invocations) are currently padded to the of next power of 2, with respect to the ratios in the [`all_cairo` layout](https://github.com/lambdaclass/cairo-vm/blob/15bf79470cdd8eff29f41fc0a87143dce5499c7e/vm/src/types/instance_definitions/builtins_instance_def.rs#L157).
 
 This padding exists for legacy reasons and will be removed in a future version, as Stwo does not rely on it.
 
