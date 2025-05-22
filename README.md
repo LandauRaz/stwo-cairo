@@ -6,7 +6,7 @@ Prove Cairo programs with the blazing-fast [Stwo prover](https://github.com/star
 * [Prerequisites](#prerequisites)
 * [Usage](#usage)
   * [Example](#example)
-* [Input format](#input-format)
+* [Inputs](#inputs)
 * [Limitations](#limitations)
   * [Gas](#gas)
   * [Syscalls](#syscalls)
@@ -85,7 +85,7 @@ or:
 cairo-prove prove <path-to-executable> <path-to-output-file> --arguments-file <path-to-args-file>
 ```
 
-*Note: For information about the formats of `arguments` and `arguments-file`, see [Input format](#input-format).*
+*Note: For information about the formats of `arguments` and `arguments-file`, see [Inputs](#inputs).*
 
 To verify a proof, run:
 
@@ -130,7 +130,7 @@ Finished `dev` profile target(s) in 4 seconds
 [2025-05-27T10:26:02Z INFO  cairo_prove] Verification successful
 ```
 
-## Input format
+## Inputs
 
 The expected input provided to `cairo-prove prove` using the `--arguments` option is a comma-separated list of integers. This list should correspond to the [serialization](https://docs.starknet.io/architecture-and-concepts/smart-contracts/serialization-of-cairo-types/) of the `main` function’s arguments, for example:
 
