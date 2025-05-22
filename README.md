@@ -28,7 +28,7 @@ In particular:
 
 - [Rust](https://www.rust-lang.org/tools/install/)
 
-  - See [`cairo-prove/rust-toolchain.toml`](cairo-prove/.rust-toolchain.toml) for the specific version
+  - See [`cairo-prove/rust-toolchain.toml`](cairo-prove/rust-toolchain.toml) for the specific version
 - [Scarb](https://docs.swmansion.com/scarb/download.html)
   - The recommended installation method is using [asdf](https://asdf-vm.com/)
   - Make sure to use version 2.10.0 and onwards, and preferably the latest nightly version.
