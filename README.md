@@ -73,7 +73,7 @@ sudo cp target/release/cairo-prove /usr/local/bin/
 
 ## Usage
 
-To prove an execution of a Cairo program you must first create its executable. To do so, navigate to the project's directory and run:
+To prove an execution of a Cairo program you must first create its executable. To do so, navigate to its project's directory and run:
 
 ```
 scarb build
