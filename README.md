@@ -24,7 +24,7 @@ In particular:
 
 * Breaking API changes are might happen often
 
-# Prerequisites
+## Prerequisites
 
 - [Rust](https://www.rust-lang.org/tools/install/)
 
@@ -38,13 +38,18 @@ In particular:
     ```
     asdf set -u scarb latest:nightly
     ```
-  
-## Using Stwo to prove Cairo programs
 
-First, clone this repo, build the `cairo-prove` project, and add its binary to your PATH:
+## Installation
+
+First, clone this repo:
 
 ```
 git clone https://github.com/starkware-libs/stwo-cairo.git
+```
+
+Then, build the `cairo-prove` project and add its binary to your PATH:
+
+```
 cd stwo-cairo/cairo-prove
 ./build.sh
 sudo cp target/release/prove-cairo /usr/local/bin/
@@ -52,13 +57,15 @@ sudo cp target/release/prove-cairo /usr/local/bin/
 
 *Note: Adding the binary to your path is optional but highly recommended, as otherwise `cairo-prove`'s path needs to be specified each time it is used.*
 
+## Usage
+
 To prove an execution of a Cairo program you must first create its executable. To do so, navigate to the project's directory and run:
 
 ```
 scarb build
 ```
 
-To generate a proof for an execution of an executable, run:
+To generate a proof for an execution of a program's executable, run:
 
 ```
 cairo-prove prove <path-to-executable> <path-to-output> --arguments <args>
@@ -77,13 +84,13 @@ To verify a proof, run:
 cairo-prove verify <path-to-proof-file>
 ```
 
-or, if the Pedersen hash is used in the proof:
+or, if the Pedersen builtin is used in the proof:
 
 ```
 cairo-prove verify <path-to-proof-file> --with-pedersen
 ```
 
-*Note: To learn more about using the Pedersen hash, see [Pedersen](#pedersen).*
+*Note: To learn more about the effects of the Pedersen builtin, see [Pedersen](#pedersen).*
 
 ### Example
 
@@ -149,7 +156,7 @@ This padding exists for legacy reasons and will be removed in a future version, 
 
 ### Pedersen
 
-When the Pedersen hash is used in an execution of a program, additional pre-processed columns need to be added to its proof.
+When the [Pedersen builtin](https://book.cairo-lang.org/ch204-02-01-pedersen.html#pedersen-builtin) is used in an execution of a program, additional pre-processed columns need to be added to its proof.
 
 This variant is automatically deduced by `cairo-prove prove`, but requires adding the `--with-pedersen` option to `cairo-prove verify`.
 
