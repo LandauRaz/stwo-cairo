@@ -41,14 +41,14 @@ In particular:
 
 ## Installation
 
-First, clone this repo and navigate into its directory:
+First, clone this repo and navigate to its directory:
 
 ```
 git clone https://github.com/starkware-libs/stwo-cairo.git
 cd stwo-cairo
 ```
 
-Next, checkout to the `ohad/ursus` branch:
+Next, check out to the `ohad/ursus` branch:
 
 ```
 git checkout ohad/ursus
@@ -56,7 +56,7 @@ git checkout ohad/ursus
 
 *Note: This part is to be removed when `ohad/ursus` is merged.*
 
-Then, navigate into the `cairo-prove` directory and build the project:
+Then, navigate to the `cairo-prove` directory and build the project:
 
 ```
 cd cairo-prove
